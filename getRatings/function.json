@@ -19,11 +19,6 @@
       "collectionName": "ratings",
       "sqlQuery": "SELECT * from ratings where ratings.userid = {userid}",
       "connectionStringSetting": "https://kosrating3.documents.azure.com/;AccountKey=MFOVBePSvVVv3VQvr5qlGMqfgM4llP6pkhoRVXP2WU8pdRBFXZmwNYmDK6Eyk1L1AJwyD5YSsBisACDbN4GX5g==;"
-    },
-    {
-      "type": "http",
-      "direction": "out",
-      "name": "$return"
     }
   ]
 }
