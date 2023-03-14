@@ -2,12 +2,12 @@ import logging
 
 import azure.functions as func
 
-def get_ratings(ratings: func.DocumentList) -> str:
-    if not ratings:
-        logging.warning("Rating items not found")
-    else:
-        logging.info("Found rating items %s", len(ratings))
-    return ratings
+#def get_ratings(ratings: func.DocumentList) -> object:
+#    if not ratings:
+#        logging.warning("Rating items not found")
+#    else:
+#        logging.info("Found rating items %s", len(ratings))
+#    return ratings
 
 
 def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse:
@@ -22,8 +22,6 @@ def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse
             userId = req_body.get('userid')
 
     if userId:
-       ratings = get_ratings(ratings)
-
        return func.HttpResponse(
              status_code=200
         )
