@@ -1,5 +1,6 @@
 import logging
 import azure.functions as func
+import json
 
 def main(req: func.HttpRequest, documents: func.DocumentList) -> str:
     if not documents:
@@ -8,4 +9,7 @@ def main(req: func.HttpRequest, documents: func.DocumentList) -> str:
         logging.info("Found rating ID, full rating=%s",
                      documents[0])
         document = documents[0]
-    return document
+    return func.HttpResponse(
+        json.dumps(document),
+        mimetype="application/json",
+    )
