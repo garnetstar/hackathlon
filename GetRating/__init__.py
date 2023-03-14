@@ -10,4 +10,4 @@ def main(req: func.HttpRequest, documents: func.DocumentList) -> str:
                      documents[0])
         raiting_dict = {"id": documents[0]['id'],"userId": documents[0]['userId'],"productId": documents[0]['productId'],"timestamp": documents[0]['timestamp'],"locationName": documents[0]['locationName'],"rating": documents[0]['rating'],"userNotes": documents[0]['userNotes'] }
         raiting_json = json.dumps(raiting_dict)
-    return documents[0].to_json
+    return raiting_json
