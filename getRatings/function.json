@@ -12,13 +12,18 @@
       "route":"getRatings/{userid}"
     },
     {
+      "name": "$return",
+      "type": "http",
+      "direction": "out"
+    },
+    {
       "name": "ratings",
       "type": "cosmosDB",
       "direction": "in",
       "databaseName": "ratings",
       "collectionName": "ratings",
       "sqlQuery": "SELECT * from ratings where ratings.userid = {userid}",
-      "connectionStringSetting": "cosmosratings"
+      "connectionStringSetting": "cosmosrating"
     },
     {
       "type": "http",
