@@ -13,20 +13,28 @@ import azure.functions as func
 def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     userId = req.params.get('userid')
-    if not userId:
-        try:
-            req_body = req.get_json()
-        except ValueError:
-            pass
-        else:
-            userId = req_body.get('userid')
 
-    if userId:
-       return func.HttpResponse(
-             status_code=200
-        )
-    else:
-        return func.HttpResponse(
-             status_code=404
-        )
+    return func.HttpResponse(
+        "OK",
+        status_code=200
+    )
+
+
+
+#    if not userId:
+#        try:
+#            req_body = req.get_json()
+#        except ValueError:
+#            pass
+#        else:
+#            userId = req_body.get('userid')
+
+#    if userId:
+#       return func.HttpResponse(
+#             status_code=200
+#        )
+#    else:
+#        return func.HttpResponse(
+#             status_code=404
+#        )
     
