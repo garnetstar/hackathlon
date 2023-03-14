@@ -2,7 +2,7 @@ import logging
 
 import azure.functions as func
 
-def get_ratings(req: func.HttpRequest, ratings: func.DocumentList) -> str:
+def get_ratings(ratings: func.DocumentList) -> str:
     if not ratings:
         logging.warning("Rating items not found")
     else:
@@ -10,20 +10,18 @@ def get_ratings(req: func.HttpRequest, ratings: func.DocumentList) -> str:
     return ratings
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, ) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
-
-    userId = req.params.get('userId')
+    userId = req.params.get('userid')
     if not userId:
         try:
             req_body = req.get_json()
         except ValueError:
             pass
         else:
-            userId = req_body.get('name')
+            userId = req_body.get('userid')
 
     if userId:
-
        ratings = get_ratings()
 
        return func.HttpResponse(
@@ -33,3 +31,4 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
              status_code=404
         )
+    
