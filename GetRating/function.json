@@ -22,7 +22,7 @@
       "type": "cosmosDB",
       "databaseName": "ratings",
       "collectionName": "ratings",
-      "sqlQuery": "SELECT * from c where c.id = {ratingId}",
+      "sqlQuery": "SELECT * from rating AS r where r.id = {ratingId}",
       "connectionStringSetting": "cosmosratings",
       "direction": "in"
   }
