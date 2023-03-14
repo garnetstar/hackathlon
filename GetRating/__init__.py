@@ -7,4 +7,5 @@ def main(req: func.HttpRequest, documents: func.DocumentList) -> str:
     else:
         logging.info("Found rating ID, full rating=%s",
                      documents[0])
-    return 'OK'
+        document = documents[0]
+    return document
