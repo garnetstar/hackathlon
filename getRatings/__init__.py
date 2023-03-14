@@ -20,10 +20,7 @@ def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse
         raiting_dict = {"id": rating[0]['id'],"userId": rating[0]['userId'],"productId": rating[0]['productId'],"timestamp": rating[0]['timestamp'],"locationName": rating[0]['locationName'],"rating": rating[0]['rating'],"userNotes": rating[0]['userNotes'] }
         rating_list.append(raiting_dict)
 
-    return func.HttpResponse(
- #       rating_list,
-        status_code=200
-    )
+    return rating_list
 
 
 
