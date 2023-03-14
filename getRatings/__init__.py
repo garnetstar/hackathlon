@@ -17,7 +17,7 @@ def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse
     rating_list = []
 
     for rating in ratings:
-        raiting_dict = {"id": rating[0]['id'],"userId": rating[0]['userId'],"productId": rating[0]['productId'],"timestamp": rating[0]['timestamp'],"locationName": rating[0]['locationName'],"rating": rating[0]['rating'],"userNotes": rating[0]['userNotes'] }
+        raiting_dict = {"id": rating['id'],"userId": rating['userId'],"productId": rating['productId'],"timestamp": rating['timestamp'],"locationName": rating['locationName'],"rating": rating['rating'],"userNotes": rating['userNotes'] }
         rating_list.append(raiting_dict)
 
     return rating_list
