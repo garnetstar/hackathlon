@@ -8,8 +8,6 @@ def main(req: func.HttpRequest, documents: func.DocumentList) -> str:
     else:
         logging.info("Found rating ID, full rating=%s",
                      documents[0])
-        document = documents[0]
-    return func.HttpResponse(
-        json.dumps(document),
-        mimetype="application/json",
-    )
+        raiting_dict = {"id": documents[0]['id'],"userId": documents[0]['userId'] }
+        raiting_json = json.dumps(raiting_dict)
+    return raiting_json
