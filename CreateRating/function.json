@@ -12,6 +12,15 @@
       ]
     },
     {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "doc",
+      "databaseName": "ratings",
+      "collectionName": "ratings",
+      "createIfNotExists": "true",
+      "connectionStringSetting": "cosmosratings"
+    },
+    {
       "type": "http",
       "direction": "out",
       "name": "$return"

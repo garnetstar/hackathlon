@@ -20,23 +20,23 @@ import azure.functions as func
 
 def validate_item(item_type, id):
     r = requests.get(url="https://serverlessohapi.azurewebsites.net/api/Get{0}?{1}Id={2}".format(item_type.capitalize(), item_type, id), timeout=5)
-    logging.info("Validate item response code: {}".format(r.status_code))
+    logging.info("Validate item response code: %s", r.status_code)
     return r.status_code == 200
 
 def validate_rating(rating):
     try:
         id_int = isinstance(rating["rating"], int)
-        logging.warning("ID: {}".format(id_int))
+        logging.warning("ID: %s", id_int)
         product = validate_item("product", rating["productId"])
-        logging.warning("Product: {}".format(product))
+        logging.warning("Product: %s", product)
         user = validate_item("user", rating["userId"])
-        logging.warning("User: {}".format(user))
+        logging.warning("User: %s", user)
         return all([id_int, product, user])
     except KeyError:
         logging.error("Check if rating is an integer and if productId and userId exists.")
         return False
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     try:
@@ -44,7 +44,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     except ValueError:
         return func.HttpResponse("Invalid input", status_code=400)
 
-    if not validate_rating(rating):
+    if validate_rating(rating):
+        request_body = req.get_body()
+        try:
+            doc.set(func.Document.from_json(request_body))
+        except Exception as ex:
+            return func.HttpResponse(f"Could not insert data into database. Error: {ex}", status_code=500)        
+    else:
         return func.HttpResponse("Input data not complete.", status_code=400)
 
     return func.HttpResponse("Done processing", status_code=200)
