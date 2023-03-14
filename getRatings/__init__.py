@@ -10,7 +10,7 @@ def get_ratings(ratings: func.DocumentList) -> str:
     return ratings
 
 
-def main(req: func.HttpRequest, ) -> func.HttpResponse:
+def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
     userId = req.params.get('userid')
     if not userId:
