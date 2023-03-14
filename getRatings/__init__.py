@@ -21,7 +21,7 @@ def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse
         rating_list.append(raiting_dict)
 
     return func.HttpResponse(
-        rating_list,
+ #       rating_list,
         status_code=200
     )
 
