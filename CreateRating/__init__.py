@@ -19,20 +19,22 @@ import azure.functions as func
 
 
 def validate_item(item_type, id):
-    r = requests.get(url="https://serverlessohapi.azurewebsites.net/api/Get{0}?{1}Id={2}".format(item_type.capitalize(), item_type, id))
+    r = requests.get(url="https://serverlessohapi.azurewebsites.net/api/Get{0}?{1}Id={2}".format(item_type.capitalize(), item_type, id), timeout=5)
+    logging.info("Validate item response code: {}".format(r.status_code))
     return r.status_code == 200
 
 def validate_rating(rating):
-    if not isinstance(rating["rating"], int):
-        logging.error("rating field is not an integer")
-        return False
     try:
-        validate_item("product", rating["productId"])
-        validate_item("user", rating["userId"])
+        id_int = isinstance(rating["rating"], int)
+        logging.warning("ID: {}".format(id_int))
+        product = validate_item("product", rating["productId"])
+        logging.warning("Product: {}".format(product))
+        user = validate_item("user", rating["userId"])
+        logging.warning("User: {}".format(user))
+        return all([id_int, product, user])
     except KeyError:
-        logging.error("Either productId or userId does not exist.")
+        logging.error("Check if rating is an integer and if productId and userId exists.")
         return False
-    return True
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
