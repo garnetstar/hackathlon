@@ -23,7 +23,7 @@
       "databaseName": "ratings",
       "collectionName": "ratings",
       "sqlQuery": "SELECT * from rating AS r where r.id = {ratingId}",
-      "connectionStringSetting": "AccountEndpoint=https://kosrating3.documents.azure.com:443/;AccountKey=MFOVBePSvVVv3VQvr5qlGMqfgM4llP6pkhoRVXP2WU8pdRBFXZmwNYmDK6Eyk1L1AJwyD5YSsBisACDbN4GX5g==;",
+      "connectionStringSetting": "cosmosratings",
       "direction": "in"
   }
   ]
