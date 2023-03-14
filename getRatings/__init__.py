@@ -1,5 +1,5 @@
 import logging
-
+import json
 import azure.functions as func
 
 #def get_ratings(ratings: func.DocumentList) -> object:
@@ -20,7 +20,7 @@ def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse
         raiting_dict = {"id": rating['id'],"userId": rating['userId'],"productId": rating['productId'],"timestamp": rating['timestamp'],"locationName": rating['locationName'],"rating": rating['rating'],"userNotes": rating['userNotes'] }
         rating_list.append(raiting_dict)
 
-    return rating_list
+    return json.dumps(rating_list)
 
 
 
