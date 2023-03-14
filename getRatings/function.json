@@ -12,11 +12,6 @@
       "route":"getRatings/{userid}"
     },
     {
-      "name": "$return",
-      "type": "http",
-      "direction": "out"
-    },
-    {
       "name": "ratings",
       "type": "cosmosDB",
       "direction": "in",
