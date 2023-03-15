@@ -57,4 +57,4 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
     else:
         return func.HttpResponse("Input data not complete.", status_code=400)
 
-    return func.HttpResponse("Done processing", status_code=200)
+    return func.HttpResponse("", status_code=200)
