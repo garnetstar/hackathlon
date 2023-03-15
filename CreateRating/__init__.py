@@ -1,6 +1,8 @@
 import logging
 import requests
+import uuid
 import json
+from datetime import datetime
 import azure.functions as func
 
 
@@ -45,9 +47,11 @@ def main(req: func.HttpRequest, doc: func.Out[func.Document]) -> func.HttpRespon
         return func.HttpResponse("Invalid input", status_code=400)
 
     if validate_rating(rating):
-        request_body = req.get_body()
+        rating["id"] = f"{uuid.uuid4()}"
+        rating["timestamp"] = f"{datetime.utcnow()}"
+        logging.warn("req body2: %s", rating)
         try:
-            doc.set(func.Document.from_json(request_body))
+            doc.set(func.Document.from_json(json.dumps(rating)))
         except Exception as ex:
             return func.HttpResponse(f"Could not insert data into database. Error: {ex}", status_code=500)        
     else:
