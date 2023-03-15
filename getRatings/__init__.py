@@ -16,6 +16,6 @@ def main(req: func.HttpRequest, ratings: func.DocumentList) -> func.HttpResponse
         return json.dumps(rating_list)
     else:
         return func.HttpResponse(
-             "Not found",
+             "",
              status_code=404
         )
